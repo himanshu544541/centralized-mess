@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import NotificationBell from './NotificationBell';
 import { UtensilsCrossed, LogOut, ShieldCheck, Clock, XCircle, Store, GraduationCap, Utensils, HelpCircle } from 'lucide-react';
 
 const Navbar = () => {
@@ -70,6 +71,9 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           {user ? (
             <div className="flex items-center gap-3">
+              {/* Notification Bell */}
+              <NotificationBell />
+
               {/* Role & Status Pill */}
               <div className="hidden sm:flex flex-col items-end">
                 <div className="flex items-center gap-1.5">

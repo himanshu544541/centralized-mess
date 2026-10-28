@@ -22,6 +22,7 @@ import AdminConfig from './pages/admin/AdminConfig';
 import AdminSettlements from './pages/admin/AdminSettlements';
 import AdminMarginReport from './pages/admin/AdminMarginReport';
 import AdminCheckIns from './pages/admin/AdminCheckIns';
+import AdminRatings from './pages/admin/AdminRatings';
 
 function App() {
   return (
@@ -133,6 +134,14 @@ function App() {
                 element={
                   <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
                     <AdminCheckIns />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/ratings"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
+                    <AdminRatings />
                   </ProtectedRoute>
                 }
               />

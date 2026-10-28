@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ShieldCheck, Sliders, DollarSign, PieChart, ListChecks } from 'lucide-react';
+import { ShieldCheck, Sliders, DollarSign, PieChart, ListChecks, Star } from 'lucide-react';
 
 const AdminNav = () => {
   const navItems = [
@@ -8,7 +8,8 @@ const AdminNav = () => {
     { to: '/admin/config', label: 'Pricing Config', icon: Sliders },
     { to: '/admin/settlements', label: 'Vendor Settlements', icon: DollarSign },
     { to: '/admin/margin', label: 'Margin Report', icon: PieChart },
-    { to: '/admin/checkins', label: 'Check-in Audit', icon: ListChecks }
+    { to: '/admin/checkins', label: 'Check-in Audit', icon: ListChecks },
+    { to: '/admin/ratings', label: 'Private Ratings', icon: Star }
   ];
 
   return (

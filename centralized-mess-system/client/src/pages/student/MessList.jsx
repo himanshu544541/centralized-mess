@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-import { Store, Search, Clock, Utensils, MapPin, CheckCircle2, XCircle, Award, Sparkles, Filter } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import RatingModal from '../../components/RatingModal';
+import { Store, Search, Clock, Utensils, MapPin, CheckCircle2, XCircle, Award, Sparkles, Filter, Star } from 'lucide-react';
 
 const MessList = () => {
+  const { user } = useAuth();
   const [messes, setMesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [openOnly, setOpenOnly] = useState(false);
   const [activeMenuSlot, setActiveMenuSlot] = useState({}); // { [messId]: 'lunch' | 'dinner' }
+  const [ratingTargetMess, setRatingTargetMess] = useState(null);
 
   const fetchMesses = async () => {
     setLoading(true);
@@ -193,16 +197,34 @@ const MessList = () => {
                   </div>
                 </div>
 
-                {/* Footer status pill */}
+                {/* Footer status pill & Rate button */}
                 <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 text-[11px] text-gray-500 flex justify-between items-center">
                   <span>Included in Universal Pass</span>
-                  <span className="font-semibold text-indigo-600">Scan QR at mess counter</span>
+                  {user?.role === 'student' ? (
+                    <button
+                      onClick={() => setRatingTargetMess(m)}
+                      className="inline-flex items-center gap-1 font-bold text-amber-600 hover:text-amber-700 hover:underline"
+                    >
+                      <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                      <span>Rate Mess</span>
+                    </button>
+                  ) : (
+                    <span className="font-semibold text-indigo-600">Scan QR at counter</span>
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
       )}
+
+      {/* Rating Modal */}
+      <RatingModal
+        mess={ratingTargetMess}
+        isOpen={Boolean(ratingTargetMess)}
+        onClose={() => setRatingTargetMess(null)}
+        onRatingSubmitted={fetchMesses}
+      />
     </div>
   );
 };

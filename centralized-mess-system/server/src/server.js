@@ -13,6 +13,9 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const checkInRoutes = require('./routes/checkInRoutes');
 const vendorRoutes = require('./routes/vendorRoutes');
+const ratingRoutes = require('./routes/ratingRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const { startClosingAlertsCron } = require('./jobs/closingAlerts');
 
 // Load environment variables
 dotenv.config();
@@ -41,6 +44,13 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/checkins', checkInRoutes);
 app.use('/api/vendor', vendorRoutes);
+app.use('/api/ratings', ratingRoutes);
+app.use('/api/notifications', notificationRoutes);
+
+// Start background cron jobs in non-test mode
+if (process.env.NODE_ENV !== 'test') {
+  startClosingAlertsCron();
+}
 
 // Health Check Endpoint (Phase 1)
 app.get('/api/health', (req, res) => {
