@@ -18,6 +18,10 @@ import VendorMessManage from './pages/vendor/VendorMessManage';
 import VendorQRScanner from './pages/vendor/VendorQRScanner';
 import VendorWhyJoin from './pages/vendor/VendorWhyJoin';
 import AdminVerifications from './pages/admin/AdminVerifications';
+import AdminConfig from './pages/admin/AdminConfig';
+import AdminSettlements from './pages/admin/AdminSettlements';
+import AdminMarginReport from './pages/admin/AdminMarginReport';
+import AdminCheckIns from './pages/admin/AdminCheckIns';
 
 function App() {
   return (
@@ -89,10 +93,46 @@ function App() {
 
               {/* Protected Admin Routes */}
               <Route
+                path="/admin"
+                element={<Navigate to="/admin/verifications" replace />}
+              />
+              <Route
                 path="/admin/verifications"
                 element={
                   <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
                     <AdminVerifications />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/config"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
+                    <AdminConfig />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/settlements"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
+                    <AdminSettlements />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/margin"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
+                    <AdminMarginReport />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/checkins"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']} requireApproval={false}>
+                    <AdminCheckIns />
                   </ProtectedRoute>
                 }
               />

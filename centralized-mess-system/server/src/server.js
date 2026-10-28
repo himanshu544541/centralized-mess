@@ -12,6 +12,7 @@ const messRoutes = require('./routes/messRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const checkInRoutes = require('./routes/checkInRoutes');
+const vendorRoutes = require('./routes/vendorRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,7 @@ app.use('/api/messes', messRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/checkins', checkInRoutes);
+app.use('/api/vendor', vendorRoutes);
 
 // Health Check Endpoint (Phase 1)
 app.get('/api/health', (req, res) => {
